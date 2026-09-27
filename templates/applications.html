@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Applications</h1>
+    <a href="/" class="nav-link">Home</a>
+
+    <form method="GET" action="/applications" class="search-form">
+        <input
+            type="text"
+            name="search"
+            value="{{ request.args.get('search', '') }}"
+            placeholder="Search applicant or email">
+
+    <select name="status">
+
+        <option value="" {% if request.args.get('status', '') == '' %}selected{% endif %}>All Statuses</option>
+
+        <option value="Applied" {% if request.args.get('status') == 'Applied' %}selected{% endif %}>Applied</option>
+
+        <option value="Shortlisted" {% if request.args.get('status') == 'Shortlisted' %}selected{% endif %}>Shortlisted</option>
+
+        <option value="Interview" {% if request.args.get('status') == 'Interview' %}selected{% endif %}>Interview</option>
+
+        <option value="Rejected" {% if request.args.get('status') == 'Rejected' %}selected{% endif %}>Rejected</option>
+
+        <option value="Hired" {% if request.args.get('status') == 'Hired' %}selected{% endif %}>Hired</option>
+
+    </select>
+
+    <button type="submit">Filter</button>
+
+    </form>
+
+    <a href="/applications">Clear Filter</a>
+
+    {% for application in applications %}
+        <div class="list-item">
+
+            <a href="/applications/{{ application[0] }}">
+                <strong>{{ application[1] }}</strong>
+            </a>
+
+            <p>{{ application[2] }}</p>
+            <p>{{ application[3] }}</p>
+            <p>{{ application[4] }}</p>
+            <p>Status: {{ application[5] }}</p>
+
+        </div>
+    {% endfor %}
+
+</body>
+</html>

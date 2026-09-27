@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Job</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Add Job</h1>
+
+    <form method="POST" class="form-card">
+
+        <label>Company:</label>
+        <p>Select the company offering this job.</p>
+        <select name="company_id" required>
+
+            {% for company in companies %}
+                <option value="{{ company[0] }}">
+                    {{ company[1] }} - {{ company[2] }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Job Title:</label>
+        <input type="text" name="title" required>
+
+        <br><br>
+
+        <label>Location:</label>
+        <input type="text" name="location" required>
+
+        <br><br>
+
+        <button type="submit">Add Job</button>
+
+    </form>
+
+    <br>
+
+    <a href="/jobs" class="nav-link">Back to Jobs</a>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Job Portal</h1>
+
+    <div class="dashboard">
+        <a class="card" href="/companies">
+            <h2>{{ company_count }}</h2>
+            <p>Companies</p>
+        </a>
+
+        <a class="card" href="/jobs">
+            <h2>{{ job_count }}</h2>
+            <p>Jobs</p>
+        </a>
+
+        <a class="card" href="/applications">
+            <h2>{{ application_count }}</h2>
+            <p>Applications</p>
+        </a>
+    </div>
+
+    <h2>Applications by Status</h2>
+
+    <div class="status-list">
+
+        {% for status, count in status_counts %}
+
+            <div class="status-item">
+                <span>{{ status }}</span>
+                <strong>{{ count }}</strong>
+            </div>
+
+        {% else %}
+
+            <p>No applications yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+<h2>Recent Applications</h2>
+
+<div class="recent-applications">
+
+    {% for application in recent_applications %}
+
+        <div class="application-card">
+
+            <a href="/applications/{{ application[0] }}">
+                <strong>{{ application[1] }}</strong>
+            </a>
+
+            <p>{{ application[2] }}</p>
+            <p>{{ application[3] }}</p>
+            <p>Status: {{ application[4] }}</p>
+
+        </div>
+
+    {% else %}
+
+        <p>No applications yet.</p>
+
+    {% endfor %}
+
+</div>
+</body>
+</html>

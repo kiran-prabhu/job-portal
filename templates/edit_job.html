@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Job</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Edit Job</h1>
+
+    <form method="POST" class="form-card">
+
+        <label>Company:</label>
+        <select name="company_id" required>
+
+            {% for company in companies %}
+                <option value="{{ company[0] }}"
+                    {% if company[0] == job[1] %}selected{% endif %}>
+                    {{ company[1] }} - {{ company[2] }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Job Title:</label>
+        <input type="text" name="title" value="{{ job[2] }}" required>
+
+        <br><br>
+
+        <label>Location:</label>
+        <input type="text" name="location" value="{{ job[3] }}" required>
+
+        <br><br>
+
+        <button type="submit">Save Changes</button>
+
+    </form>
+
+    <br>
+
+    <a href="/jobs/{{ job[0] }}" class="nav-link">Cancel</a>
+
+</body>
+</html>

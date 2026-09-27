@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Companies</h1>
+    <a href="/" class="nav-link">Home</a>
+    <br><br>
+    <a href="/companies/add" class="nav-link">Add Company</a>
+
+    <form method="GET" action="/companies" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ request.args.get('search', '') }}"
+            placeholder="Search companies">
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    <a href="/companies">Clear Search</a>
+
+    {% for company in companies %}
+        <div class="list-item">
+            <a href="/companies/{{ company[0] }}">
+                <strong>{{ company[1] }}</strong>
+            </a>
+            <p>{{ company[2] }}</p>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
